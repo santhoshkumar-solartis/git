@@ -7,6 +7,11 @@
      <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>6.4.Final</version>
+          <configuration>
+               <connectionType>connection</connectionType>
+               <username>santhosh</username>
+               <password>welcome*1</password>
+          </configuration>
 
 
     <properties>
