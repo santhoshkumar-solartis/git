@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-     <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>6.4.Final</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Mavenapp</groupId>
+  <artifactId>hello_Project</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>hello_Project Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+ 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -16,40 +17,47 @@
 
     <build>
         <plugins>
-        <plugin>
-              <groupId>org.jboss.as.plugins</groupId>
-              <artifactId>jboss-as-maven-plugin</artifactId>
-              <version>6.4.Final</version>
-        <configuration>
-             <jbosshome>D:\jboss-eap-6.4.0\jboss-eap-6.4</jbosshome>
-            <hostname>localhost</hostname>
-            <port>8081</port>
-            <name>sample.war</name>
-            <username>santhosh</username>
-            <password>welcome*1</password>
-        </configuration>
-    </plugin>
+         
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <extensions>false</extensions>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.jboss.logmanager</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <warSourceDirectory>C:\Users\subalakshmi_s\.m2\repository\Mavenapp\hello_Project\0.0.1-SNAPSHOT\</warSourceDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+              <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.1</version>
-                <executions>
-                   <execution>
-                    <id>default-deploy</id>
-                    <phase>deploy</phase>
-                    <goals>
-                      <goal>deploy</goal>
-                    </goals>
-                  </execution>
-                </executions>
-                 </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19</version>
@@ -61,9 +69,82 @@
                     </dependency>
                 </dependencies>
             </plugin>
+          
+             <plugin>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven2-plugin</artifactId>
+            <version>1.1.1</version>
+            <configuration>
+                <container>
+                    <containerId>jboss6x</containerId>
+                         <type>remote</type>
+                </container>
+            </configuration>
+        </plugin>
+            <plugin>  
+                <groupId>org.jboss.as.plugins</groupId>  
+                <artifactId>jboss-as-maven-plugin</artifactId>  
+                <version>7.5.Final</version>  
+                <executions>  
+                    <execution>  
+                        <id>running</id>  
+                        <phase>pre-integration-test</phase>  
+                        <goals>  
+                            <goal>run</goal>  
+                        </goals>  
+                        <configuration>  
+                            <jbossHome>E:\DevOps_new\softwares\jboss-eap-6.4.0\jboss-eap-6.4</jbossHome>  
+                            <hostname>localhost</hostname>  
+                            <username>root</username>  
+                            <password>Subh@8189</password>  
+                        </configuration>  
+                    </execution>  
+                    <execution>  
+                        <id>deploying</id>  
+                        <phase>install</phase>  
+                        <goals>  
+                            <goal>deploy</goal>  
+                        </goals>  
+                        <configuration>  
+                            <filename>hello_Project-0.0.1-SNAPSHOT.war</filename>  
+                        </configuration>  
+                    </execution>  
+                </executions>  
+            </plugin>  
         </plugins>
     </build>
-
+        <profiles>
+  <profile>
+    <id>integration</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven2-plugin</artifactId>
+          <version>1.0</version>
+          <configuration>
+            <!-- Container configuration -->
+            <container>
+              <containerId>jboss6x</containerId>
+            </container>
+            <configuration>
+              <type>remote</type>
+              <home>E:\DevOps_new\softwares\jboss-eap-6.4.0\jboss-eap-6.4</home>
+              <serverName>default</serverName>
+               <configuration>
+            <hostname>localhost</hostname>
+            <port>9990</port>
+            <name>hello_Project-0.0.1-SNAPSHOT.war</name>
+            <username>root</username>
+            <password>Subh@8189</password>
+        </configuration>
+            </configuration>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -79,10 +160,4 @@
 
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>myMavenRepo.read</id>
-            <url>https://mymavenrepo.com/repo/FN8PIshHk5uALNhkXbhs/</url>
-        </repository>
-    </repositories>
 </project>
