@@ -68,11 +68,4 @@
          <url>http://localhost:8081/</url>
       </repository>
    </distributionManagement>
-    <distributionManagement>
-        <repository>
-            <id>myMavenRepo.write</id>
-            <url>https://mymavenrepo.com/repo/9Q8JoRpymi4UGK8HzbVq/</url>
-        </repository>
-    </distributionManagement>
-
 </project>
