@@ -95,8 +95,8 @@
                         <configuration>  
                             <jbossHome>E:\DevOps_new\softwares\jboss-eap-6.4.0\jboss-eap-6.4</jbossHome>  
                             <hostname>localhost</hostname>  
-                            <username>root</username>  
-                            <password>Subh@8189</password>  
+                            <username>santhosh</username>  
+                            <password>welcome*1</password>  
                         </configuration>  
                     </execution>  
                     <execution>  
