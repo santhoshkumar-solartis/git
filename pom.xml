@@ -21,6 +21,7 @@
               <artifactId>jboss-as-maven-plugin</artifactId>
               <version>6.4.Final</version>
         <configuration>
+             <jbosshome>D:\jboss-eap-6.4.0\jboss-eap-6.4</jbosshome>
             <hostname>localhost</hostname>
             <port>8081</port>
             <name>sample.war</name>
@@ -48,20 +49,7 @@
                     </goals>
                   </execution>
                 </executions>
-            </plugin>
-                 <plugin>
-                <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>6.4.Final</version>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                 </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19</version>
@@ -97,11 +85,4 @@
             <url>https://mymavenrepo.com/repo/FN8PIshHk5uALNhkXbhs/</url>
         </repository>
     </repositories>
-    <distributionManagement>
-      <repository>
-         <id>Core-API-Java-Release</id>
-         <name>Release repository</name>
-         <url>http://localhost:8081/</url>
-      </repository>
-   </distributionManagement>
 </project>
