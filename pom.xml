@@ -61,7 +61,13 @@
             <url>https://mymavenrepo.com/repo/FN8PIshHk5uALNhkXbhs/</url>
         </repository>
     </repositories>
-
+    <distributionManagement>
+      <repository>
+         <id>Core-API-Java-Release</id>
+         <name>Release repository</name>
+         <url>http://localhost:8081/</url>
+      </repository>
+   </distributionManagement>
     <distributionManagement>
         <repository>
             <id>myMavenRepo.write</id>
